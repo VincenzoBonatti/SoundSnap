@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste</title>
+</head>
+<body onload="main()">
+    <div id="img"></div>
+    <p id="artista"></p>
+    <p id="nome_album"></p>
+        
+        
+    <script src="beckend.js"></script>
+    <script>
+        function displayer(object) {
+            document.getElementById('img').innerHTML = `<img id="img" src= ${object.images[1].url}>`
+
+            document.getElementById('artista').innerHTML = `artista: ${object.artists[0].name}`
+
+            document.getElementById('nome_album').innerHTML = `Nome do Album: ${object.name}`
+            
+        }    
+    </script>
+    </body>
+</html>

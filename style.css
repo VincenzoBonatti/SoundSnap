@@ -9,7 +9,7 @@ header{
     max-width: 100%;
     justify-content: space-between;
     background-color: #191013;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 50px 5px 50px;
     align-items: center;
     height: 4em;
 
@@ -51,7 +51,7 @@ form{
 
     & button{
         height: 80%;
-        width: 8%;
+        width: 10%;
         background-color: #191013;
         border-radius: 70px;
         border: none;
@@ -61,6 +61,45 @@ form{
             max-height: 100%;
         }
     }
+}
+
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2em;
+    background-color:  #f4f4f2;
+    
+}
+
+.descubra{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 1em;
+}
+
+.tags{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    min-width: max-content;
+ 
+    & p{
+        background-color: #191013;
+        color: #d4cdc5;
+        padding: 3px 20px 3px 20px;
+        border-radius: 80px;
+        cursor: pointer;
+    }
+}
+
+.artistas{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
 }
 
 

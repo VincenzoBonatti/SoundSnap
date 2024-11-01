@@ -22,17 +22,38 @@
 
     <main>
         <div class="descubra">
-            
+            <div class="tags">
+                <p>Descubra novos artistas</p>
+                <p>Descubra novos álbuns</p>
+                <p>Descubra novas músicas</p>
+                <p>Mais ouvidas hoje</p>
+                <p>Mais ouvidas do ano</p>
+                <p>Mais ouvidas de todos os tempos</p>
+            </div>
+            <div class="artistas">
+                <div class="sugestao_art" id="0"></div>
+                <div class="sugestao_art" id="1"></div>
+                <div class="sugestao_art" id="2"></div>
+            </div>
         </div>
     </main>
 
 
 
-
+    <script src="acess.js"></script>
     <script>
         document.getElementById("pesquisa").addEventListener("submit", function name(e) {
             e.preventDefault()
         })
+        async function artistas(token) {
+            let a = document.getElementsByClassName("sugestao_art")
+            for (let i = 0; i < a.length; i++) {
+                let artista = await get_artistas(token)
+                console.log(artista.artists)
+                document.getElementById(i).innerHTML = `<img id="img" src= ${artista.artists.items[0].images[0].url}>`
+            }
+        }
     </script>
+
 </body>
 </html>
