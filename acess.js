@@ -1,3 +1,4 @@
+
 async function acess() {
     let c_id = "c39f13e6b0b9496882f544f1a9456d7a"
     let c_sct = "b819c1e4cca44124bd66cbc9b5e74e79"
@@ -16,8 +17,7 @@ async function acess() {
 
 
 
-async function get_artistas(token) {
-
+async function get_rand(token, obj) {
 let getRandomSongsArray = [
     '%25a%25', 'a%25', '%25a',
     '%25e%25', 'e%25', '%25e',
@@ -26,7 +26,7 @@ let getRandomSongsArray = [
     '%25u%25', 'u%25', '%25u']
 let getRandomSongs = getRandomSongsArray[Math.floor(Math.random()*getRandomSongsArray.length)];
 let getRandomOffset = Math.floor(Math.random() * 999)
-let url = `https://api.spotify.com/v1/search?query=${getRandomSongs}&offset=${getRandomOffset}&limit=1&type=artist&market=NL`;
+let url = `https://api.spotify.com/v1/search?query=${getRandomSongs}&offset=${getRandomOffset}&limit=1&type=${obj}&market=NL`;
 
 
     const result = fetch(url, {
@@ -41,14 +41,11 @@ let url = `https://api.spotify.com/v1/search?query=${getRandomSongs}&offset=${ge
 }
 
 
-
-
-
 async function main() {
     let token = await acess()
 
     
-
+    await feed(token)
     await artistas(token)
 
 }

@@ -34,23 +34,38 @@
                 <div class="sugestao_art" id="0"></div>
                 <div class="sugestao_art" id="1"></div>
                 <div class="sugestao_art" id="2"></div>
+                <div class="sugestao_art" id="3"></div>
+                <div class="sugestao_art" id="4"></div>
             </div>
+        </div>
+        <div class="feed-container" id="feed">
+            
         </div>
     </main>
 
-
+<a href=""></a>
 
     <script src="acess.js"></script>
     <script>
         document.getElementById("pesquisa").addEventListener("submit", function name(e) {
             e.preventDefault()
         })
+
+
         async function artistas(token) {
             let a = document.getElementsByClassName("sugestao_art")
             for (let i = 0; i < a.length; i++) {
-                let artista = await get_artistas(token)
-                console.log(artista.artists)
-                document.getElementById(i).innerHTML = `<img id="img" src= ${artista.artists.items[0].images[0].url}>`
+                let artista = await get_rand(token, "artist")
+                document.getElementById(i).innerHTML = `<p>${artista.artists.items[0].name}</p><a href=""><img id="img" src= ${artista.artists.items[0].images[1].url}>`
+            }
+        }
+
+
+        async function feed(token) {
+            let a = document.getElementById("feed")
+            for (let i = 0; i < 5; i++) {
+                let album = await get_rand(token, "album")
+                await console.log(album.albums)
             }
         }
     </script>
