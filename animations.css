@@ -1,90 +1,163 @@
+.button {
+  --color: #1E2235;
+  --color-hover: #1E2235;
+  --color-active: #fff;
+  --icon: #BBC1E1;
+  --icon-hover: #8A91B4;
+  --icon-active: #fff;
+  --background: #fff;
+  --background-hover: #fff;
+  --background-active: #362A89;
+  --border: #E1E6F9;
+  --border-active: #362A89;
+  --shadow: #{rgba(#001177, .025)};
+  display: block;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  border: 0;
+  background: none;
+  padding: 8px 20px 8px 24px;
+  border-radius: 9px;
+  line-height: 27px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color);
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .2s linear;
+  &.dark {
+      --color: #F6F8FF;
+      --color-hover: #F6F8FF;
+      --color-active: #fff;
+      --icon: #8A91B4;
+      --icon-hover: #BBC1E1;
+      --icon-active: #fff;
+      --background: #1E2235;
+      --background-hover: #171827;
+      --background-active: #275EFE;
+      --border: transparent;
+      --border-active: transparent;
+      --shadow: #{rgba(#001177, .16)};
+  }
+  &:hover {
+      --icon: var(--icon-hover);
+      --color: var(--color-hover);
+      --background: var(--background-hover);
+      --border-width: 2px;
+  }
+  &:active {
+      --scale: .95;
+  }
+  &:not(.liked) {
+      &:hover {
+          --hand-rotate: 8;
+          --hand-thumb-1: -12deg;
+          --hand-thumb-2: 36deg;
+      }
+  }
+  &.liked {
+      --span-x: 2px;
+      --span-d-o: 1;
+      --span-d-x: 0;
+      --icon: var(--icon-active);
+      --color: var(--color-active);
+      --border: var(--border-active);
+      --background: var(--background-active);
+  }
+  &:before {
+      content: '';
+      min-width: 103px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      transition: background .2s linear, transform .2s, box-shadow .2s linear;
+      transform: scale(var(--scale, 1)) translateZ(0);
+      background: var(--background);
+      box-shadow: inset 0 0 0 var(--border-width, 1px) var(--border), 0 4px 8px var(--shadow), 0 8px 20px var(--shadow);
+  }
+  .hand {
+      width: 11px;
+      height: 11px;
+      border-radius: 2px 0 0 0;
+      background: var(--icon);
+      position: relative;
+      margin: 10px 8px 0 0;
+      transform-origin: -5px -1px;
+      transition: transform .25s, background .2s linear;
+      transform: rotate(calc(var(--hand-rotate, 0) * 1deg)) translateZ(0);
+      &:before,
+      &:after {
+          content: '';
+          background: var(--icon);
+          position: absolute;
+          transition: background .2s linear, box-shadow .2s linear;
+      }
+      &:before {
+          left: -5px;
+          bottom: 0;
+          height: 12px;
+          width: 4px;
+          border-radius: 1px 1px 0 1px;
+      }
+      &:after {
+          right: -3px;
+          top: 0;
+          width: 4px;
+          height: 4px;
+          border-radius: 0 2px 2px 0;
+          background: var(--icon);
+          box-shadow: -.5px 4px 0 var(--icon), -1px 8px 0 var(--icon), -1.5px 12px 0 var(--icon);
+          transform: scaleY(.6825);
+          transform-origin: 0 0;
+      }
+      .thumb {
+          background: var(--icon);
+          width: 10px;
+          height: 4px;
+          border-radius: 2px;
+          transform-origin: 2px 2px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          transition: transform .25s, background .2s linear;
+          transform: scale(.85) translateY(-.5px) rotate(var(--hand-thumb-1, -45deg)) translateZ(0);
+          &:before {
+              content: '';
+              height: 4px;
+              width: 7px;
+              border-radius: 2px;
+              transform-origin: 2px 2px;
+              background: var(--icon);
+              position: absolute;
+              left: 7px;
+              top: 0;
+              transition: transform .25s, background .2s linear;
+              transform: rotate(var(--hand-thumb-2, -45deg)) translateZ(0);
+          }
+      }
+  }
+  .hand,
+  span {
+      display: inline-block;
+      vertical-align: top;
+      span {
+          opacity: var(--span-d-o, 0);
+          transition: transform .25s, opacity .2s linear;
+          transform: translateX(var(--span-d-x, 4px)) translateZ(0);
+      }
+  }
+  & > span {
+      transition: transform .25s;
+      transform: translateX(var(--span-x, 4px)) translateZ(0);
+  }
+}
 
-:root {
-    --color-blue: rgb(78, 101, 203);
-    --color-purple: rgb(113,75,128);
-    --color-pink: rgb(203, 66, 116);
-    
-    --transition-time: 500ms;
-    --transition-ease: cubic-bezier(.1,.7,.8,.3);
-  }
-  
-  .toggle {
-    display: flex;
-    width: 40px;
-    height: 40px;
-    place-items: center;
-    place-content: center;
-  }
-  
-  #heart-check {
-    position: absolute;
-    visibility: hidden;
-  }
-  
-  #heart {
-    cursor: pointer;
-    svg {
-      width: 30px;
-    }
-    #stroke {
-      stroke-dasharray: 100;
-      stroke-dashoffset: 100;
-      stroke-linecap: round;
-      stroke-width: 2.5;
-    }
-    #initial {
-      stroke-width: 1.5;
-      stroke: var(--color-pink);
-      fill: transparent;
-    }
-  }
-  
-  #heart-check:checked + #heart {
-    svg {
-      transform-origin: 50% 50%;
-      animation: heart var(--transition-time) cubic-bezier(.64,-1.5,.64,1.5);
-      animation-fill-mode: forwards;
-    }
-    #initial {
-      display: none;
-    }
-    #stroke {
-      animation: stroke var(--transition-time) var(--transition-ease);
-      animation-fill-mode: forwards;
-    }
-  }
-  
-  @keyframes heart {
-    from {
-      transform: scale(1)
-    }
-    78% {
-      transform: scale(1.25)
-    }
-    to {
-      transform: scale(1)
-    }
-  }
-  
-  @keyframes stroke {
-    from {
-      stroke: var(--color-blue);
-      fill: transparent
-      
-    }
-    50% {
-      stroke: var(--color-purple); 
-    }
-    85% {
-      fill: transparent
-    }
-    to {
-      stroke-dashoffset: 0;
-      stroke: var(--color-pink);
-      fill: var(--color-pink)
-    }
-  }
-  
+
   
 
 

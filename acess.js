@@ -48,8 +48,8 @@ async function main() {
     let token = await acess()
 
     
-    await feed(token)
     await artistas(token)
+    await feed(token)
 
 }
 
