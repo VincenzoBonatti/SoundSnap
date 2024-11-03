@@ -1,0 +1,218 @@
+
+:root {
+    --color-blue: rgb(78, 101, 203);
+    --color-purple: rgb(113,75,128);
+    --color-pink: rgb(203, 66, 116);
+    
+    --transition-time: 500ms;
+    --transition-ease: cubic-bezier(.1,.7,.8,.3);
+  }
+  
+  .toggle {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    place-content: center;
+  }
+  
+  #heart-check {
+    position: absolute;
+    visibility: hidden;
+  }
+  
+  #heart {
+    cursor: pointer;
+    svg {
+      width: 30px;
+    }
+    #stroke {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      stroke-linecap: round;
+      stroke-width: 2.5;
+    }
+    #initial {
+      stroke-width: 1.5;
+      stroke: var(--color-pink);
+      fill: transparent;
+    }
+  }
+  
+  #heart-check:checked + #heart {
+    svg {
+      transform-origin: 50% 50%;
+      animation: heart var(--transition-time) cubic-bezier(.64,-1.5,.64,1.5);
+      animation-fill-mode: forwards;
+    }
+    #initial {
+      display: none;
+    }
+    #stroke {
+      animation: stroke var(--transition-time) var(--transition-ease);
+      animation-fill-mode: forwards;
+    }
+  }
+  
+  @keyframes heart {
+    from {
+      transform: scale(1)
+    }
+    78% {
+      transform: scale(1.25)
+    }
+    to {
+      transform: scale(1)
+    }
+  }
+  
+  @keyframes stroke {
+    from {
+      stroke: var(--color-blue);
+      fill: transparent
+      
+    }
+    50% {
+      stroke: var(--color-purple); 
+    }
+    85% {
+      fill: transparent
+    }
+    to {
+      stroke-dashoffset: 0;
+      stroke: var(--color-pink);
+      fill: var(--color-pink)
+    }
+  }
+  
+  
+
+
+
+  
+  
+  
+  .favorite-button {
+      --background-default: #191013;
+      --text-color-default: #d4cdc5;
+      --star-color-default: #62677C;
+      --star-face-color-default: #1F2128;
+      --star-color-active: #F6C206;
+      --star-face-color-active: #845901;
+      --star-hole: #243a69;
+      --star-hole-inner: #20232C;
+      --button-y: 0px;
+      --star-y: 0px;
+      --star-scale: 1;
+      --star-rotate: 0deg;
+      --star-hole-scale: 0;
+      --star-face-scale: 1;
+      --text-x: 0px;
+      --text-o: 1;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-appearance: none;
+      outline: none;
+      border: none;
+      background: none;
+      min-width: 125px;
+      padding: 12px 24px 12px 16px;
+      margin: 0;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 19px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      color: var(--text-color-default);
+      transform: translateY(var(--button-y)) translateZ(0);
+      &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 9px;
+          transition: transform .2s;
+          transform: scale(var(--background-scale-x, 1), var(--background-scale-y, 1)) translateZ(0);
+          background: var(--background-default);
+      }
+      &:active {
+          --background-scale-x: .98;
+          --background-scale-y: .96;
+      }
+      span {
+          display: block;
+          opacity: var(--text-o);
+          transform: translateX(var(--text-x));
+      }
+      .icon {
+          width: 36px;
+          height: 119px;
+          display: flex;
+          pointer-events: none;
+          position: relative;
+          clip-path: ellipse(150% 50% at 50% 50%);
+          margin: -100px 2px 0 -8px;
+          &:before {
+              content: '';
+              margin-top: auto;
+              display: block;
+              width: 36px;
+              height: 12px;
+              background: var(--star-hole);
+              box-shadow: inset 0 3px 0 0 var(--star-hole-inner);
+              border-radius: 100px / 30px;
+              transform: scale(var(--star-hole-scale));
+              transform-origin: 50% 100%;
+          }
+          .star {
+              width: 20px;
+              height: 19px;
+              position: absolute;
+              left: 8px;
+              bottom: 0;
+              transform: translateY(var(--star-y)) rotate(var(--star-rotate)) scale(var(--star-scale));
+              border-radius: var(--star-radius, 0px);
+              background: var(--star-color, var(--star-color-default));
+              clip-path: var(--star-clip, polygon(10px 0, 13px 6px, 20px 7px, 15px 12px, 16px 19px, 10px 15px, 4px 19px, 5px 12px, 0 7px, 7px 6px));
+              transition: clip-path .2s, border-radius .2s, background .2s;
+              &:before,
+              &:after {
+                  content: '';
+                  position: absolute;
+                  background: var(--star-face-color, var(--star-face-color-default));
+                  transition: background .2s, box-shadow .2s;
+              }
+              &:before {
+                  width: 2px;
+                  height: 2px;
+                  border-radius: 50%;
+                  left: 7px;
+                  top: 8px;
+                  box-shadow: 4px 0 0 0 var(--star-face-color, var(--star-face-color-default));
+                  transform: scaleY(var(--star-face-scale));
+              }
+              &:after {
+                  width: 4px;
+                  height: 2px;
+                  border-radius: var(--star-face-radius, 2px 2px 0 0);
+                  left: 8px;
+                  top: 11px;
+                  transition: border-radius .2s;
+              }
+          }
+      }
+      &.star-round {
+          --star-clip: polygon(10px 0, 20px 0, 20px 7px, 20px 12px, 20px 19px, 10px 19px, 0 19px, 0 12px, 0 7px, 0 0);
+          --star-radius: 50%;
+      }
+      &.active {
+          --star-color: var(--star-color-active);
+          --star-face-color: var(--star-face-color-active);
+          --star-face-radius: 0 0 2px 2px;
+      }
+  }
+  

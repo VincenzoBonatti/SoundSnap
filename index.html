@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
     <title>Soundsnap</title>
 </head>
 <body onload="main()">
@@ -28,7 +29,6 @@
                 <p>Descubra novas músicas</p>
                 <p>Mais ouvidas hoje</p>
                 <p>Mais ouvidas do ano</p>
-                <p>Mais ouvidas de todos os tempos</p>
             </div>
             <div class="artistas">
                 <div class="sugestao_art" id="0"></div>
@@ -38,18 +38,20 @@
                 <div class="sugestao_art" id="4"></div>
             </div>
         </div>
-        <div class="feed-container" id="feed">
-            
-        </div>
+        <div class="feed-container" id="feed"></div>
     </main>
 
-<a href=""></a>
+
 
     <script src="acess.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+    <script src="star.js"></script>
     <script>
+
         document.getElementById("pesquisa").addEventListener("submit", function name(e) {
             e.preventDefault()
         })
+
 
 
         async function artistas(token) {
@@ -65,7 +67,48 @@
             let a = document.getElementById("feed")
             for (let i = 0; i < 5; i++) {
                 let album = await get_rand(token, "album")
-                await console.log(album.albums)
+                console.log(album)
+                let likes = Math.floor(Math.random() * 10000)
+
+                a.innerHTML += 
+                `<div class="post">
+                <img src=${album.albums.items[0].images[0].url} alt="">
+                <div class="descricao">
+                    <div class="info">
+                        <h1>${album.albums.items[0].name}</h1>
+                        <div class="infos">Artista: <p>${i}</p></div>
+                        <div class="infos">Musicas: <p>${i}</p></div>
+                        <div class="infos">Tipo: <p>${i}</p></div>
+                        <div class="infos">Laçamento: <p>${i}</p></div>
+                    </div>
+                    <div class="acoes">
+                        <div class="like">
+                            <div class="toggle">
+                                <input type="checkbox" id="heart-check">
+
+                                <label for="heart-check" id="heart">
+                                    <svg viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <path id="initial" d="M11.8189091,20.3167303 C17.6981818,16.5505143 20.6378182,12.5122542 20.6378182,8.20195014 C20.6378182,5.99719437 18.8550242,4 16.3283829,4 C13.777264,4 12.5417153,6.29330284 11.8189091,6.29330284 C11.0961029,6.29330284 10.1317157,4 7.30943526,4 C4.90236126,4 3,5.64715533 3,8.20195014 C3,12.5122346 5.93963637,16.5504946 11.8189091,20.3167303 Z"></path>
+                                        <path id="stroke" fill="none" d="M11.8189091,20.3167303 C17.6981818,16.5505143 20.6378182,12.5122542 20.6378182,8.20195014 C20.6378182,5.99719437 18.8550242,4 16.3283829,4 C13.4628072,4 10.284995,6.64162063 10.284995,8.70392731 C10.284995,10.0731789 10.8851209,10.9874447 11.8189091,10.9874447 C12.7526973,10.9874447 13.3528232,10.0731789 13.3528232,8.70392731 C13.3528232,6.64162063 10.1317157,4 7.30943526,4 C4.90236126,4 3,5.64715533 3,8.20195014 C3,12.5122346 5.93963637,16.5504946 11.8189091,20.3167303 Z"></path>
+                                    </svg>
+                                </label>
+                            </div>
+
+                            <p id="likes"></p>
+                        </div>
+                        <div class="fav">
+                            <button class="favorite-button">
+                                <div class="icon">
+                                    <div class="star"></div>
+                                </div>
+                                <span>Favorite</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+            
+            document.getElementById("likes").innerText = likes
             }
         }
     </script>

@@ -1,4 +1,3 @@
-
 async function acess() {
     let c_id = "c39f13e6b0b9496882f544f1a9456d7a"
     let c_sct = "b819c1e4cca44124bd66cbc9b5e74e79"
@@ -18,6 +17,7 @@ async function acess() {
 
 
 async function get_rand(token, obj) {
+
 let getRandomSongsArray = [
     '%25a%25', 'a%25', '%25a',
     '%25e%25', 'e%25', '%25e',
@@ -39,6 +39,9 @@ let url = `https://api.spotify.com/v1/search?query=${getRandomSongs}&offset=${ge
     let response = await result
     return response
 }
+
+
+
 
 
 async function main() {

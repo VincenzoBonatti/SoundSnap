@@ -1,3 +1,7 @@
+html{
+    padding-bottom: 1em;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -71,6 +75,7 @@ main {
     justify-content: center;
     align-items: center;
     padding-top: 2em;
+    gap: 3em;
     background-color: #f4f4f2;
 }
 
@@ -87,6 +92,7 @@ main {
     justify-content: space-evenly;
     flex-direction: row;
     min-width: max-content;
+    width: 100%;
 }
 
 .tags p {
@@ -121,4 +127,55 @@ main {
     align-items: center;
     cursor: pointer;
     gap: 5px;
+}
+
+.feed-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    gap: 2em;
+}
+
+.post{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #191013;
+    border-radius: 25px;
+    padding: 15px 15px 15px 15px;
+    gap: 15px;
+}
+
+.post img{
+    border-radius: 25px;
+}
+
+.descricao{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #d4cdc5;
+    border-radius: 25px;
+    padding: 15px 15px 15px 15px;
+    color: #191013;
+}
+
+.infos{
+    display: flex;
+    gap: 3px;
+}
+h1, .infos p{
+    font-weight: bold;
+}
+
+.acoes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.like{
+    display: flex;
+    align-items: center;
 }
