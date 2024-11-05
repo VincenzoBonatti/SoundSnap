@@ -68,7 +68,7 @@
 
         async function feed(token, index) {
             let a = document.getElementById("feed")
-            for (let i = index; i < index+5; i++) {
+            for (let i = index; i < index + 5; i++) {
                 console.log(i, index)
                 var album = await get_rand(token, "album")
                 console.log(album)
@@ -83,7 +83,7 @@
                                 <div class="infos artistas" >Artistas: <p id="${i}"></div>                       
                                 <div class="infos">Musicas: <p>${album.albums.items[0].total_tracks}</p></div>
                                 <div class="infos">Tipo: <p>${album.albums.items[0].album_type}</p></div>
-                                <div class="infos">Laçamento(A/M/D): <p>${album.albums.items[0].release_date}</p></div>
+                                <div class="infos">Laçamento(A/M/D): <p>${album.albums.items[0].release_date.replace(/-/g, "/")}</p></div>
                             </div>
                             <div class="acoes">
                                 <div class="like">
@@ -116,7 +116,7 @@
             }
             animations()
             gerar_token = false
-            boris += 5
+            
         }
        
         function userReachedBottom() {
@@ -130,6 +130,7 @@
                 gerar_token = true
                 let token = await acess()
                 await feed(token, boris)
+                boris += 5
             }
         });
 
