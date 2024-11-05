@@ -71,13 +71,14 @@ function animations(){
 })
 
 
-
-    document.querySelectorAll('.button').forEach(button => {
-
-        button.addEventListener('click', e => {
-            button.classList.toggle('liked');
-            if(button.classList.contains('liked')) {
-                gsap.fromTo(button, {
+    const button = document.querySelectorAll('.button')
+    for (let i = 0; i < button.length; i++) {
+        let like = document.getElementById("likes-"+i)
+        const a = parseInt(like?.innerText)
+        button[i].addEventListener('click', e => {
+            button[i].classList.toggle('liked');
+            if(button[i].classList.contains('liked')) {
+                gsap.fromTo(button[i], {
                     '--hand-rotate': 8
                 }, {
                     ease: 'none',
@@ -96,8 +97,17 @@ function animations(){
                         clearProps: true
                     }]
                 });
+                
+                
+                like.innerText = a+1
+                
+            } else {
+                like.innerText = a
             }
+            
         })
+        
+        
+    }
     
-    });
 }

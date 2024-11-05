@@ -49,7 +49,7 @@ async function main() {
 
     
     await artistas(token)
-    await feed(token)
+    await feed(token, 0)
 
 }
 

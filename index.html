@@ -36,6 +36,7 @@
                 <div class="sugestao_art" id="-3"></div>
                 <div class="sugestao_art" id="-4"></div>
                 <div class="sugestao_art" id="-5"></div>
+                <div class="sugestao_art" id="-6"></div>
             </div>
         </div>
         <div class="feed-container" id="feed"></div>
@@ -48,11 +49,12 @@
     <script src="animations.js"></script>
     <script>
 
+        let gerar_token = false
+        let boris = 5
+
         document.getElementById("pesquisa").addEventListener("submit", function name(e) {
             e.preventDefault()
         })
-
-
 
 
         async function artistas(token) {
@@ -64,9 +66,10 @@
         }
 
 
-        async function feed(token) {
+        async function feed(token, index) {
             let a = document.getElementById("feed")
-            for (let i = 0; i < 5; i++) {
+            for (let i = index; i < index+5; i++) {
+                console.log(i, index)
                 var album = await get_rand(token, "album")
                 console.log(album)
                 let likes = Math.floor(Math.random() * 10000)
@@ -91,7 +94,7 @@
                                         <span>Like<span>d</span></span>
                                     </button>
 
-                                    <p id="likes">${likes}</p>
+                                    <p id="likes-${i}">${likes}</p>
                                 </div>
                                 <div class="fav">
                                     <button class="favorite-button">
@@ -110,12 +113,26 @@
                 for (let x = 0; x < album.albums.items[0].artists.length; x++) {
                     document.getElementById(i).innerText += album.albums.items[0].artists[x].name + "\n"
                 }
-                
             }
             animations()
+            gerar_token = false
+            boris += 5
         }
        
-        
+        function userReachedBottom() {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.offsetHeight;
+            return scrollPosition >= documentHeight;
+        }
+
+        window.addEventListener('scroll', async () => {
+            if (userReachedBottom() && gerar_token == false) {
+                gerar_token = true
+                let token = await acess()
+                await feed(token, boris)
+            }
+        });
+
         </script>
     
 
