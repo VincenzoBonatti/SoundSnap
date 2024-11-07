@@ -30,8 +30,9 @@ header a img {
     max-height: 100%;
 }
 
-#logo {
+.logo {
     height: 100%;
+    background-color: transparent;
 }
 
 form {
@@ -149,10 +150,12 @@ main {
 
 .post img{
     border-radius: 25px;
-    width: 70%;
+    width: 100%;
 }
 
-
+.post a{
+    width: 70%;
+}
 
 .descricao{
     display: flex;

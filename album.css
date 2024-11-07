@@ -26,8 +26,9 @@ header a img {
     max-height: 100%;
 }
 
-#logo {
+.logo {
     height: 100%;
+    background-color: transparent;
 }
 
 form {
@@ -73,4 +74,16 @@ main {
     padding-top: 2em;
     gap: 3em;
     background-color: #f4f4f2;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    background-color: #191013;
+    border-radius: 70px;
+    color: #d4cdc5;
+    padding: 1em 1em 1em 1em;
 }

@@ -53,3 +53,6 @@ async function main() {
 
 }
 
+async function album(id) {
+    
+}
