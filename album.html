@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="album.css">
     <title>Soundsnap</title>
 </head>
-<body>
+<body onload="album_main()">
     <header>
         <a href="/" class="logo">
             <img src="logo_soundsnap_claro.png" alt="" class="logo">
@@ -23,10 +23,57 @@
     </header>
     <main>
         <div class="container">
-            <p>a</p>
-            <div class="artista"></div>
+            <div id="artista"></div>
         </div>
     </main>
     <script src="acess.js"></script>
+    <script>
+        
+async function album(token, id) {
+    const result = fetch("https://api.spotify.com/v1/albums/" + id, {
+        headers: {'Authorization': "Bearer " + token.access_token}
+    }).then(data => {
+        return data.json()
+    }).then(response =>{
+        return response
+    })
+    let response = await result
+    artista(token, response.artists[0].id, response) 
+    console.log(response)
+    return response
+}
+
+
+
+async function artista(token, id, album) {
+    const result = fetch("https://api.spotify.com/v1/artists/" + id, {
+        headers: {'Authorization': "Bearer " + token.access_token}
+    }).then(data => {
+        return data.json()
+    }).then(response =>{
+        return response
+    })
+    let response = await result
+    console.log(response)
+    await displayer(response, album)
+    return response
+}
+
+async function displayer(artista, album) {
+    let a = document.getElementById("artista")
+
+    a.innerHTML += 
+    `
+        <img src="" alt="">
+        <div class="infos">
+            <h1>${artista.name}</h1>
+            <p>${artista.followers.total} Seguidores</p>
+            <p>Principais generos: </p>
+            <p>Nota de popularidade: ${artista.popularity}</p>
+        </div>
+    `
+}
+
+    </script>
 </body>
 </html>

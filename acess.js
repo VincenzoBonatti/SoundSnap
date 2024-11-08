@@ -53,6 +53,11 @@ async function main() {
 
 }
 
-async function album(id) {
-    
+async function album_main() {
+    let token = await acess()
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+        
+    await album(token, id)
 }
