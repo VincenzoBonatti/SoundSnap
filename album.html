@@ -24,6 +24,9 @@
     <main>
         <div class="container">
             <div id="artista"></div>
+            <div id="album">
+                
+            </div>
         </div>
     </main>
     <script src="acess.js"></script>
@@ -61,17 +64,38 @@ async function artista(token, id, album) {
 
 async function displayer(artista, album) {
     let a = document.getElementById("artista")
+    let b = document.getElementById("album")
 
     a.innerHTML += 
     `
-        <img src="" alt="">
+        <img src=${artista.images[1].url} alt="">
         <div class="infos">
             <h1>${artista.name}</h1>
             <p>${artista.followers.total} Seguidores</p>
-            <p>Principais generos: </p>
+            <p id="generos">Principais generos: </p>
             <p>Nota de popularidade: ${artista.popularity}</p>
         </div>
     `
+    for (let i = 0; i < artista.genres.length; i++) {
+        document.getElementById("generos").innerHTML += artista.genres[i] + "&nbsp"
+    }
+
+
+    b.innerHTML += 
+    `
+        <img src=${album.images[0].url} alt="">
+        <div class="album_infos">
+            <h1>${album.name}</h1>
+            <div class="infos artistas" >Artistas: <p id="artistas"></div>                       
+            <div class="infos">Musicas: <p>${album.total_tracks}</p></div>
+            <div class="infos">Tipo: <p>${album.album_type}</p></div>
+            <div class="infos">Laçamento(A/M/D): <p>${album.release_date.replace(/-/g, "/")}</p></div>
+        </div>
+    `
+  
+    for (let x = 0; x < album.artists.length; x++) {
+        document.getElementById("artistas").innerText += album.artists[x].name + "\n"
+    }
 }
 
     </script>
