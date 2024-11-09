@@ -9,7 +9,7 @@
 </head>
 <body onload="main()">
     <header>
-        <a href="index.html" class="logo">
+        <a href="/" class="logo">
             <img src="logo_soundsnap_claro.png" alt="" class="logo">
         </a>
         <form action="" method="get" id="pesquisa">
@@ -83,7 +83,7 @@
                             <div class="descricao">
                                 <div class="info">
                                     <h1>${album.albums.items[0].name}</h1>
-                                    <div class="infos artistas" >Artistas: <p id="${i}"></div>                       
+                                    <div class="infos artista" ><p id="${i}">Artistas:</p></div>                       
                                     <div class="infos">Musicas: <p>${album.albums.items[0].total_tracks}</p></div>
                                     <div class="infos">Tipo: <p>${album.albums.items[0].album_type}</p></div>
                                     <div class="infos">Laçamento(A/M/D): <p>${album.albums.items[0].release_date.replace(/-/g, "/")}</p></div>
@@ -114,7 +114,11 @@
                 
   
                 for (let x = 0; x < album.albums.items[0].artists.length; x++) {
-                    document.getElementById(i).innerText += album.albums.items[0].artists[x].name + "\n"
+                    if (x >= album.albums.items[0].artists.length-1) {
+                        document.getElementById(i).innerHTML += "&nbsp" + album.albums.items[0].artists[x].name
+                    } else {
+                        document.getElementById(i).innerHTML +=  "&nbsp" + album.albums.items[0].artists[x].name + ","
+                    }
                 }
             }
             animations()

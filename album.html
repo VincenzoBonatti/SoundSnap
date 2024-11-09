@@ -8,7 +8,7 @@
 </head>
 <body onload="album_main()">
     <header>
-        <a href="index.html" class="logo">
+        <a href="/" class="logo">
             <img src="logo_soundsnap_claro.png" alt="" class="logo">
         </a>
         <form action="" method="get" id="pesquisa">
@@ -77,15 +77,19 @@ async function displayer(artista, album) {
         </div>
     `
     for (let i = 0; i < artista.genres.length; i++) {
-        document.getElementById("generos").innerHTML += artista.genres[i] + "&nbsp"
+        if (i >= artista.genres.length-1) {
+            document.getElementById("generos").innerHTML += artista.genres[i]
+        } else {
+            document.getElementById("generos").innerHTML += artista.genres[i] + ", &nbsp"
+        }
     }
 
 
     b.innerHTML += 
     `
+        <h1>${album.name}</h1>
         <img src=${album.images[0].url} alt="">
         <div class="album_infos">
-            <h1>${album.name}</h1>
             <div class="infos artistas" >Artistas: <p id="artistas"></div>                       
             <div class="infos">Musicas: <p>${album.total_tracks}</p></div>
             <div class="infos">Tipo: <p>${album.album_type}</p></div>
@@ -94,7 +98,11 @@ async function displayer(artista, album) {
     `
   
     for (let x = 0; x < album.artists.length; x++) {
-        document.getElementById("artistas").innerText += album.artists[x].name + "\n"
+        if (x >= album.artists.length-1) {
+            document.getElementById("artistas").innerText += album.artists[x]
+        } else {
+            document.getElementById("artistas").innerHTML += album.artists[x] + ", &nbsp"
+        }
     }
 }
 
