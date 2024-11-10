@@ -18,15 +18,27 @@ async function acess() {
 
 async function get_rand(token, obj) {
 
-let getRandomSongsArray = [
-    '%25a%25', 'a%25', '%25a',
-    '%25e%25', 'e%25', '%25e',
-    '%25i%25', 'i%25', '%25i',
-    '%25o%25', 'o%25', '%25o',
-    '%25u%25', 'u%25', '%25u']
-let getRandomSongs = getRandomSongsArray[Math.floor(Math.random()*getRandomSongsArray.length)];
+const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  
+
+const randomCharacter = characters.charAt(Math.floor(Math.random() * characters.length));
+let randomSearch = '';
+  
+
+switch (Math.round(Math.random() * 2)) {
+    case 0:
+        randomSearch = randomCharacter + '%25';
+    break;
+    case 1:
+        randomSearch = '%25' + randomCharacter + '%25';
+    break;
+    case 2:
+        randomSearch = '%25' + randomCharacter;
+}
+
+
 let getRandomOffset = Math.floor(Math.random() * 999)
-let url = `https://api.spotify.com/v1/search?query=${getRandomSongs}&offset=${getRandomOffset}&limit=1&type=${obj}&market=NL`;
+let url = `https://api.spotify.com/v1/search?query=${randomSearch}&offset=${getRandomOffset}&limit=1&type=${obj}&market=NL`;
 
 
     const result = fetch(url, {
