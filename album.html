@@ -24,8 +24,10 @@
     <main>
         <div class="container">
             <div id="artista"></div>
-            <div id="album">
-                
+            <div id="album"></div>
+            <div class="tracklist">
+                <h1>Track List</h1>
+                <div id="musicas"></div>
             </div>
         </div>
     </main>
@@ -65,11 +67,14 @@ async function artista(token, id, album) {
 async function displayer(artista, album) {
     let a = document.getElementById("artista")
     let b = document.getElementById("album")
+    let c = document.getElementById("musicas")
 
     a.innerHTML += 
     `
-        <img src=${artista.images[1].url} alt="">
-        <div class="infos">
+        <a href="${artista.external_urls.spotify}" target="_blank">
+            <img src=${artista.images[1].url} alt="">
+        </a>
+        <div class="arista_infos">
             <h1>${artista.name}</h1>
             <p>${artista.followers.total} Seguidores</p>
             <p id="generos">Principais generos: </p>
@@ -88,21 +93,49 @@ async function displayer(artista, album) {
     b.innerHTML += 
     `
         <h1>${album.name}</h1>
-        <img src=${album.images[0].url} alt="">
-        <div class="album_infos">
-            <div class="infos artistas" >Artistas: <p id="artistas"></div>                       
-            <div class="infos">Musicas: <p>${album.total_tracks}</p></div>
-            <div class="infos">Tipo: <p>${album.album_type}</p></div>
-            <div class="infos">Laçamento(A/M/D): <p>${album.release_date.replace(/-/g, "/")}</p></div>
+        <div class="content">
+            <a href="${album.external_urls.spotify}" target="_blank">
+                <img src=${album.images[0].url} alt="">
+            </a>
+            <div class="album_infos">
+                <div class="infos artistas" >Artistas: <div id="artistas"></div></div>                       
+                <div class="infos">Musicas: <p>${album.total_tracks}</p></div>
+                <div class="infos">Tipo: <p>${album.album_type}</p></div>
+                <div class="infos">Laçamento(A/M/D): <p>${album.release_date.replace(/-/g, "/")}</p></div>
+                <div class="infos">Popularidade do album: <p>${album.popularity}</p></div>
+            </div>
         </div>
     `
   
     for (let x = 0; x < album.artists.length; x++) {
         if (x >= album.artists.length-1) {
-            document.getElementById("artistas").innerText += album.artists[x]
+            document.getElementById("artistas").innerHTML += `<a href="${album.artists[x].external_urls.spotify}" target="_blank">${album.artists[x].name}</a>`
         } else {
-            document.getElementById("artistas").innerHTML += album.artists[x] + ", &nbsp"
+            document.getElementById("artistas").innerHTML += `<a href="${album.artists[x].external_urls.spotify}" target="_blank">${album.artists[x].name}</a>` + ", &nbsp"
         }
+    }
+
+    
+    for (let i = 0; i < album.tracks.items.length; i++) {
+        let track = album.tracks.items[i]
+        c.innerHTML += 
+        `
+        <div class="track">
+            <a href="${track.external_urls.spotify}" target="_blank">
+                ${track.name}
+            </a>
+            <div id="${i}"></div>
+        <div>
+        `
+        for (let y = 0; y < album.tracks.items[i].artists.length; y++) {
+            if (y == track.artists.length-1) {
+                document.getElementById(i).innerHTML += `<a href="${track.artists[y].external_urls.spotify}" target="_blank">${track.artists[y].name}</a>`
+            } else {
+                document.getElementById(i).innerHTML += `<a href="${track.artists[y].external_urls.spotify}" target="_blank">${track.artists[y].name}</a>` + " • "
+            }
+            
+        }
+        
     }
 }
 

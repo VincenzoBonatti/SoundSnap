@@ -122,7 +122,7 @@ h1{
 }
 
 #album img{
-    width: 50%;
+
     border-radius: 50px;
     border: 3px #191013 solid;
 }
@@ -137,6 +137,7 @@ h1{
     color: #191013;
     padding: 2em 0 2em 0;
     gap: .5em;
+    text-align: center;
 }
 
 .album_infos{
@@ -157,3 +158,58 @@ h1{
         font-weight: bold;
     }
 }
+
+.content{
+    width: 100%;
+    display: flex;
+    padding-left: 2em;
+  
+    gap: 1em;
+
+
+}
+
+#artistas{
+    display: flex;
+    flex-wrap: wrap;
+
+    & a{
+        color: #191013;
+    }
+}
+
+#musicas{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-self: start;
+}
+
+.tracklist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    gap: 1em;
+}
+
+.track a{
+    color: #d4cdc5;
+    text-decoration: none;
+}
+
+.track div a{
+    font-size: 10px;
+}
+
+.track div a:hover{
+    text-decoration: underline;    
+}
+
+.track div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
