@@ -106,7 +106,15 @@ main {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    
+    width: 12em;
+    height: 12em;
+}
+
+.artista_infos{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    font-size: 1.4em;
 }
 
 .infos{
@@ -144,7 +152,15 @@ h1{
     display: flex;
     flex-direction: column;
     width: 100%;
-    
+    align-items: center;
+    padding-top: 2em;
+}
+
+.interior{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    width: min-content;
 }
 
 .infos{
@@ -182,7 +198,8 @@ h1{
     display: flex;
     flex-direction: column;
     gap: 1em;
-    align-self: start;
+    align-items: start;
+    width: 100%;
 }
 
 .tracklist{
@@ -198,11 +215,12 @@ h1{
     text-decoration: none;
 }
 
+
 .track div a{
-    font-size: 10px;
+    font-size: 15px;
 }
 
-.track div a:hover{
+.track a:hover{
     text-decoration: underline;    
 }
 
@@ -213,3 +231,28 @@ h1{
     gap: 6px;
 }
 
+.track{
+    width: 100%;
+    border-radius: 20px;
+    padding: 5px 0 5px 1em;
+    transition: .2s;
+    font-size: 1.2em;
+}
+
+.track:hover{
+    background-color: #d4cdc5;
+    transition: .2s;
+    color: #191013;
+    & a{
+        color: #191013;
+        transition: .2s;
+    }
+}
+
+.imagem{
+    width: 100%;
+
+    & img{
+        width: 100%;
+    }
+}

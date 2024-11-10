@@ -74,7 +74,7 @@ async function displayer(artista, album) {
         <a href="${artista.external_urls.spotify}" target="_blank">
             <img src=${artista.images[1].url} alt="">
         </a>
-        <div class="arista_infos">
+        <div class="artista_infos">
             <h1>${artista.name}</h1>
             <p>${artista.followers.total} Seguidores</p>
             <p id="generos">Principais generos: </p>
@@ -94,15 +94,17 @@ async function displayer(artista, album) {
     `
         <h1>${album.name}</h1>
         <div class="content">
-            <a href="${album.external_urls.spotify}" target="_blank">
+            <a href="${album.external_urls.spotify}" target="_blank" class="imagem">
                 <img src=${album.images[0].url} alt="">
             </a>
             <div class="album_infos">
-                <div class="infos artistas" >Artistas: <div id="artistas"></div></div>                       
-                <div class="infos">Musicas: <p>${album.total_tracks}</p></div>
-                <div class="infos">Tipo: <p>${album.album_type}</p></div>
-                <div class="infos">Laçamento(A/M/D): <p>${album.release_date.replace(/-/g, "/")}</p></div>
-                <div class="infos">Popularidade do album: <p>${album.popularity}</p></div>
+                <div class="interior">
+                    <div class="infos artistas" >Artistas: <div id="artistas"></div></div>                       
+                    <div class="infos">Musicas: <p>${album.total_tracks}</p></div>
+                    <div class="infos">Tipo: <p>${album.album_type}</p></div>
+                    <div class="infos">Laçamento(A/M/D): <p>${album.release_date.replace(/-/g, "/")}</p></div>
+                    <div class="infos">Popularidade do album: <p>${album.popularity}</p></div>
+                </div>
             </div>
         </div>
     `

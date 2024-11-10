@@ -76,10 +76,9 @@
                 let likes = Math.floor(Math.random() * 15000)
 
                 a.innerHTML +=`
-                        <div class="post">
-                            <a href="${`album.html?id=${album.albums.items[0].id}`}">
-                                <img src=${album.albums.items[0].images[0].url} alt="">
-                            </a>
+                <div class="post">
+                    <a href="${`album.html?id=${album.albums.items[0].id}`}">
+                            <img src=${album.albums.items[0].images[0].url} alt="">
                             <div class="descricao">
                                 <div class="info">
                                     <h1>${album.albums.items[0].name}</h1>
@@ -88,7 +87,8 @@
                                     <div class="infos">Tipo: <p>${album.albums.items[0].album_type}</p></div>
                                     <div class="infos">Laçamento(A/M/D): <p>${album.albums.items[0].release_date.replace(/-/g, "/")}</p></div>
                                 </div>
-                                <div class="acoes">
+                    </a>
+                                    <div class="acoes">
                                     <div class="like">
                                         <button class="button dark">
                                             <div class="hand">
