@@ -8,13 +8,15 @@
     <title>Soundsnap</title>
 </head>
 <body onload="main()">
+
+    <script src="acess.js"></script>
     <header>
         <a href="/" class="logo">
             <img src="logo_soundsnap_claro.png" alt="" class="logo">
         </a>
         <form action="" method="get" id="pesquisa">
-            <input type="text" name="search" id="pesq" placeholder="O quê você quer ouvir hoje?"> 
-            <button type="submit">
+            <input type="text" name="search" id="input_pesq" placeholder="O quê você quer ouvir hoje?"> 
+            <button onclick="searchSpotify(event)" type="submit">
                 <img src="play_bege_soundsnap.png" alt="">
             </button>
         </form>
@@ -24,7 +26,7 @@
     </header>
 
     <main>
-        <div class="descubra">
+        <div class="descubra" id="descubra_id">
             <div class="tags">
                 <p>Descubra novos artistas</p>
                 <p>Descubra novos álbuns</p>
@@ -46,10 +48,13 @@
 
 
 
-    <script src="acess.js"></script>
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
     <script src="animations.js"></script>
+
     <script>
+
+
 
         let gerar_token = false
         let boris = 5
@@ -67,12 +72,14 @@
             }
         }
 
+
+       
         async function feed(token, index) {
             let a = document.getElementById("feed")
             for (let i = index; i < index + 5; i++) {
-                console.log(i, index)
+                // console.log(i, index)
                 var album = await get_rand(token, "album")
-                console.log(album)
+                // console.log(album)
                 let likes = Math.floor(Math.random() * 15000)
 
                 a.innerHTML +=`
@@ -126,6 +133,8 @@
             
         }
        
+
+        
         function userReachedBottom() {
             const scrollPosition = window.scrollY + window.innerHeight;
             const documentHeight = document.documentElement.offsetHeight;

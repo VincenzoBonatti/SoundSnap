@@ -11,6 +11,8 @@ async function acess() {
         }),
       });
     let data = response.json()
+
+
     return data
 }
 
@@ -49,6 +51,8 @@ let url = `https://api.spotify.com/v1/search?query=${randomSearch}&offset=${getR
         return response
     })
     let response = await result
+
+  
     return response
 }
 
@@ -73,3 +77,126 @@ async function album_main() {
         
     await album(token, id)
 }
+
+
+
+let resultado_pesquisa = []
+
+async function searchSpotify(event) {
+
+    document.getElementById("feed").innerHTML = "";
+    document.getElementById("descubra_id").innerHTML = "";
+
+    try {
+        
+           
+            const {access_token} = await acess();  
+            if(!access_token) {
+                return
+            }
+
+            const query = await  document.getElementById('input_pesq').value;
+
+            if(!query){
+                return
+            }
+
+            
+            const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=artist,album,track&limit=10`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                },
+                });
+                
+                if (!response ) {
+                    throw new Error
+                }
+
+                const data = await response.json();
+
+                console.log('data =>', data)
+                
+
+                const result = await data?.artists?.items; 
+                    resultado_pesquisa = await result;
+
+                // console.log('resultado_pesquisa =>', resultado_pesquisa)
+                
+                
+                await mostrarResultadoPesquisaEmTela(resultado_pesquisa)
+    
+    }catch(error) {
+        console.log(error)
+        
+    }
+  }
+
+
+ async function mostrarResultadoPesquisaEmTela(data) {
+  
+        if(data.length > 0) {
+      
+            let a = document.getElementById("feed")
+
+            if(!a){
+                throw new Error
+            }
+            
+
+            data.forEach(item => {
+            
+                
+            a.innerHTML +=`
+                <div class="post">
+                            <img src=${item.images.length > 0 ? item.images[0].url : ''} alt="">
+                            <div class="descricao">
+                                <div class="info">
+                                    <h1>${item.name}</h1>
+                                    <div class="infos artista" ><p id="${item.name}">Artistas:</p></div>                       
+                                    <div class="infos">Musicas: <p>${item.name}</p></div>
+                                    <div class="infos">Tipo: <p>${item.name}</p></div>
+                                    <div class="infos">Laçamento(A/M/D): <p>${item.name}</p></div>
+                                </div>
+             
+                                    <div class="acoes">
+                                    <div class="like">
+                                        <button class="button dark">
+                                            <div class="hand">
+                                                <div class="thumb"></div>
+                                            </div>
+                                            <span>Like<span>d</span></span>
+                                        </button>
+        
+                                        
+                                    </div>
+                                    <div class="fav">
+                                        <button class="favorite-button">
+                                            <div class="icon">
+                                                <div class="star"></div>
+                                            </div>
+                                            <span>Favorite</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            `
+            })
+
+
+
+        }else {
+            console.log('erro ao mostrar resultado da pesquisa')
+        }
+
+}
+
+
+ 
+
+  
+
+  
+
+  
