@@ -57,9 +57,6 @@ let url = `https://api.spotify.com/v1/search?query=${randomSearch}&offset=${getR
 }
 
 
-
-
-
 async function main() {
     let token = await acess()
 
