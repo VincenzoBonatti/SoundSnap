@@ -73,7 +73,9 @@ function animations(){
 
     const button = document.querySelectorAll('.button')
     for (let i = 0; i < button.length; i++) {
-        let like = document.getElementById("likes-"+i)
+        let like = document.querySelector(`.likes[aria-index='${i}']`)
+
+        
         const a = parseInt(like?.innerText)
         button[i].addEventListener('click', e => {
             button[i].classList.toggle('liked');

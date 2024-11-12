@@ -11,6 +11,8 @@ async function acess() {
         }),
       });
     let data = response.json()
+
+
     return data
 }
 
@@ -49,11 +51,10 @@ let url = `https://api.spotify.com/v1/search?query=${randomSearch}&offset=${getR
         return response
     })
     let response = await result
+
+  
     return response
 }
-
-
-
 
 
 async function main() {
@@ -73,3 +74,58 @@ async function album_main() {
         
     await album(token, id)
 }
+
+
+
+let resultado_pesquisa = []
+
+async function searchSpotify(event) {
+
+    document.getElementById("feed").innerHTML = "";
+    document.getElementById("descubra_id").innerHTML = "";
+
+    try {
+        
+           
+            const {access_token} = await acess();  
+            if(!access_token) {
+                return
+            }
+
+            const query = await  document.getElementById('input_pesq').value;
+
+            if(!query){
+                return
+            }
+
+            
+            const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=album&limit=10`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                },
+                });
+                
+                if (!response ) {
+                    throw new Error
+                }
+
+                const data = await response.json()
+                
+
+                const result = await data; 
+                    resultado_pesquisa = await result;
+
+                // console.log('resultado_pesquisa =>', resultado_pesquisa)
+                
+                
+                await mostrarResultadoPesquisaEmTela(resultado_pesquisa.albums.items)
+    
+    }catch(error) {
+        console.log(error)
+        
+    }
+  }
+
+
+  

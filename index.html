@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,17 @@
     <link rel="stylesheet" href="animations.css">
     <title>Soundsnap</title>
 </head>
+
 <body onload="main()">
+
+    <script src="acess.js"></script>
     <header>
         <a href="/" class="logo">
             <img src="logo_soundsnap_claro.png" alt="" class="logo">
         </a>
         <form action="" method="get" id="pesquisa">
-            <input type="text" name="search" id="pesq" placeholder="O quê você quer ouvir hoje?"> 
-            <button type="submit">
+            <input type="text" name="search" id="input_pesq" placeholder="O quê você quer ouvir hoje?">
+            <button onclick="searchSpotify(event)" type="submit">
                 <img src="play_bege_soundsnap.png" alt="">
             </button>
         </form>
@@ -24,7 +28,7 @@
     </header>
 
     <main>
-        <div class="descubra">
+        <div class="descubra" id="descubra_id">
             <div class="tags">
                 <p>Descubra novos artistas</p>
                 <p>Descubra novos álbuns</p>
@@ -46,11 +50,14 @@
 
 
 
-    <script src="acess.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
     <script src="animations.js"></script>
+
     <script>
 
+
+        let carregar_mais = true
         let gerar_token = false
         let boris = 5
 
@@ -61,21 +68,21 @@
 
         async function artistas(token) {
             let a = document.getElementsByClassName("sugestao_art")
-            for (let i = -1; i >= -1*a.length; i--) {
+            for (let i = -1; i >= -1 * a.length; i--) {
                 let artista = await get_rand(token, "artist")
                 document.getElementById(i).innerHTML = `<p>${artista.artists.items[0].name}</p><a href=${artista.artists.items[0].external_urls.spotify} target="_blank"><img id="img" src= ${artista.artists.items[0].images[1].url}>`
             }
         }
 
+
+
         async function feed(token, index) {
             let a = document.getElementById("feed")
             for (let i = index; i < index + 5; i++) {
-                console.log(i, index)
                 var album = await get_rand(token, "album")
-                console.log(album)
                 let likes = Math.floor(Math.random() * 15000)
 
-                a.innerHTML +=`
+                a.innerHTML += `
                 <div class="post">
                     <a href="${`album.html?id=${album.albums.items[0].id}`}">
                             <img src=${album.albums.items[0].images[0].url} alt="">
@@ -97,7 +104,7 @@
                                             <span>Like<span>d</span></span>
                                         </button>
 
-                                        <p id="likes-${i}">${likes}</p>
+                                        <p class="likes" aria-index="${i}">${likes}</p>
                                     </div>
                                     <div class="fav">
                                         <button class="favorite-button">
@@ -111,21 +118,23 @@
                             </div>
                         </div>
                 `
-                
-  
+
+
                 for (let x = 0; x < album.albums.items[0].artists.length; x++) {
-                    if (x >= album.albums.items[0].artists.length-1) {
+                    if (x >= album.albums.items[0].artists.length - 1) {
                         document.getElementById(i).innerHTML += "&nbsp" + album.albums.items[0].artists[x].name
                     } else {
-                        document.getElementById(i).innerHTML +=  "&nbsp" + album.albums.items[0].artists[x].name + ","
+                        document.getElementById(i).innerHTML += "&nbsp" + album.albums.items[0].artists[x].name + ","
                     }
                 }
             }
             animations()
             gerar_token = false
-            
+
         }
-       
+
+
+
         function userReachedBottom() {
             const scrollPosition = window.scrollY + window.innerHeight;
             const documentHeight = document.documentElement.offsetHeight;
@@ -133,7 +142,7 @@
         }
 
         window.addEventListener('scroll', async () => {
-            if (userReachedBottom() && gerar_token == false) {
+            if (userReachedBottom() && gerar_token == false && carregar_mais == true) {
                 gerar_token = true
                 let token = await acess()
                 await feed(token, boris)
@@ -141,8 +150,72 @@
             }
         });
 
-        </script>
-    
+
+
+        async function mostrarResultadoPesquisaEmTela(data) {
+
+            let a = document.getElementById("feed")
+            let likes = Math.floor(Math.random() * 15000)
+            if (!a) {
+                throw new Error
+            }
+
+
+            for (let i = 0; i < data.length; i++) {
+
+
+                a.innerHTML += `
+            <div class="post">
+                        <a href="${`album.html?id=${data[i].id}`}">
+                            <img src=${data[i].images[0].url} alt="">
+                            <div class="descricao">
+                                <div class="info">
+                                    <h1>${data[i].name}</h1>
+                                    <div class="infos artista" ><p id="${i}">Artistas:</p></div>                       
+                                    <div class="infos">Musicas: <p>${data[i].total_tracks}</p></div>
+                                    <div class="infos">Tipo: <p>${data[i].album_type}</p></div>
+                                    <div class="infos">Laçamento(A/M/D): <p>${data[i].release_date.replace(/-/g, "/")}</p></div>
+                                </div>
+                    </a>
+                                <div class="acoes">
+                                    <div class="like">
+                                        <button class="button dark">
+                                            <div class="hand">
+                                                <div class="thumb"></div>
+                                            </div>
+                                            <span>Like<span>d</span></span>
+                                        </button>
+                                        <p class="likes" aria-index="${i}">${likes}</p>
+                                        
+                                    </div>
+                                    <div class="fav">
+                                        <button class="favorite-button">
+                                            <div class="icon">
+                                                <div class="star"></div>
+                                            </div>
+                                            <span>Favorite</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        `
+                for (let x = 0; x < data[i].artists.length; x++) {
+                    if (x >= data[i].artists.length - 1) {
+                        document.getElementById(i).innerHTML += "&nbsp" + data[i].artists[x].name
+                    } else {
+                        document.getElementById(i).innerHTML += "&nbsp" + data[i].artists[x].name + ","
+                    }
+                }
+                animations()
+
+            }
+            carregar_mais = false
+        }
+
+    </script>
+
 
 </body>
+
 </html>

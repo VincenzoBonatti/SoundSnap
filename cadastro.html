@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="cadastro.css">
     <title>Soundsnap</title>
 </head>
+
+<script src="formulario.js"></script>
+
 <body>
     <header>
         <a href="/" class="logo">
@@ -23,25 +26,26 @@
         <div class="container">
             <div class="cadastro">
                 <h1>Cadastro</h1>
-                <form action="" method="post">
+                <form action="/users/">
                     <p>Nome de usuário</p>
-                    <input type="text" name="usuario">
+                    <input id="input_usuario"  type="text" name="usuario">
                     <p>Nome completo</p>
-                    <input type="text" name="nome">
+                    <input id="input_nome" type="text" name="nome">
                     <p>Email</p>
-                    <input type="text" name="email">
+                    <input id="input_email" type="text" name="email">
                     <p>Senha</p>
-                    <input type="password" name="senha">
-                    <button type="submit">Cadastrar</button>
+                    <input id="input_senha" type="password" name="senha">
+                    <input type="hidden" name="imagem" value="">
+                    <button  class="buttonRegister" type="submit">Cadastrar</button>
                 </form>
             </div>
             <div class="login">
                 <h1>Login</h1>
                 <form action="" method="get">
                     <p>Email</p>
-                    <input type="text" name="login_email">
+                    <input id="input_login_email" type="text" name="login_email">
                     <p>Senha</p>
-                    <input type="password" name="login_senha">
+                    <input id="input_login_senha" type="password" name="login_senha">
                     <button type="submit">Login</button>
                 </form>
             </div>
