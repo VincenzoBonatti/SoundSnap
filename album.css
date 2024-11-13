@@ -108,6 +108,8 @@ main {
     border-radius: 50%;
     width: 12em;
     height: 12em;
+    object-fit: cover;
+    object-position: center center
 }
 
 .artista_infos{

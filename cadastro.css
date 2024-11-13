@@ -150,7 +150,7 @@ main {
     border: 1px black solid;
 }
 
-.buttonRegister {
+.cadastro button {
     background-color: #d4cdc5;
     color: #191013;
     padding: 5px 10px 5px 10px;

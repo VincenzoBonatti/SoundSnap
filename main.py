@@ -2,9 +2,19 @@ from fastapi import FastAPI, HTTPException
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
 from typing import List, Optional
+from fastapi.middleware.cors import CORSMiddleware
 import os
 
 app = FastAPI()
+
+# Permitindo receber post e get de todas as fontes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 # Configurações do MongoDB
 MONGO_DETAILS = os.getenv("MONGO_DETAILS", "mongodb+srv://alucardeletronico:supernatural@clusterfatec.3p8m5kg.mongodb.net/?retryWrites=true&w=majority")

@@ -6,16 +6,13 @@
     <link rel="stylesheet" href="cadastro.css">
     <title>Soundsnap</title>
 </head>
-
-<script src="formulario.js"></script>
-
 <body>
     <header>
         <a href="/" class="logo">
             <img src="logo_soundsnap_claro.png" alt="" class="logo">
         </a>
-        <form action="" method="get" id="pesquisa">
-            <input type="text" name="search" id="pesq" placeholder="O quê você quer ouvir hoje?"> 
+        <form action="" method="get" >
+            <input type="text" placeholder="O quê você quer ouvir hoje?"> 
             <button type="submit">
                 <img src="play_bege_soundsnap.png" alt="">
             </button>
@@ -26,30 +23,31 @@
         <div class="container">
             <div class="cadastro">
                 <h1>Cadastro</h1>
-                <form action="/users/">
+                <form id="cadastro">
                     <p>Nome de usuário</p>
-                    <input id="input_usuario"  type="text" name="usuario">
+                    <input  type="text" name="usuario" required/>
                     <p>Nome completo</p>
-                    <input id="input_nome" type="text" name="nome">
+                    <input type="text" name="nome" required/>
                     <p>Email</p>
-                    <input id="input_email" type="text" name="email">
+                    <input type="text" name="email" required/>
                     <p>Senha</p>
-                    <input id="input_senha" type="password" name="senha">
-                    <input type="hidden" name="imagem" value="">
-                    <button  class="buttonRegister" type="submit">Cadastrar</button>
+                    <input type="password" name="senha" required/>
+                    <input type="hidden" name="imagem" value=""/>
+                    <button type="submit">Cadastrar</button>
                 </form>
             </div>
             <div class="login">
                 <h1>Login</h1>
                 <form action="" method="get">
                     <p>Email</p>
-                    <input id="input_login_email" type="text" name="login_email">
+                    <input type="text" name="login_email" required>
                     <p>Senha</p>
-                    <input id="input_login_senha" type="password" name="login_senha">
+                    <input type="password" name="login_senha" required>
                     <button type="submit">Login</button>
                 </form>
             </div>
         </div>
     </main>
+    <script src="cadastro.js"></script>
 </body>
 </html>
