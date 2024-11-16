@@ -71,9 +71,19 @@ async function album_main() {
 
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
-        
+    header()
     await album(token, id)
 }
+
+async function main_perfil() {
+    let token = await acess()
+
+    const params = new URLSearchParams(window.location.search);
+    const user = params.get('usuario');
+        
+    await album(token, user)
+}
+
 
 
 
@@ -128,4 +138,8 @@ async function searchSpotify(event) {
   }
 
 
+function deslogar() {
+    localStorage.clear()
+    window.location.replace('/')
+}
   

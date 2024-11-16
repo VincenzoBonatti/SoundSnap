@@ -11,7 +11,7 @@
         <a href="/" class="logo">
             <img src="logo_soundsnap_claro.png" alt="" class="logo">
         </a>
-        <form action="" method="get" >
+        <form id="pesquisa">
             <input type="text" placeholder="O quê você quer ouvir hoje?"> 
             <button type="submit">
                 <img src="play_bege_soundsnap.png" alt="">
@@ -49,5 +49,10 @@
         </div>
     </main>
     <script src="cadastro.js"></script>
+    <script>
+        document.getElementById("pesquisa").addEventListener("submit", function name(e) {
+            e.preventDefault()
+        })
+    </script>
 </body>
 </html>

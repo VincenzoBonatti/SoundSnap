@@ -105,7 +105,7 @@
                                         <p class="likes" aria-index="${i}">${likes}</p>
                                     </div>
                                     <div class="fav">
-                                        <button class="favorite-button">
+                                        <button class="favorite-button" id="${album.albums.items[0].id}" onclick="fav_caller('${album.albums.items[0].id}')">
                                             <div class="icon">
                                                 <div class="star"></div>
                                             </div>
@@ -125,9 +125,10 @@
                         document.getElementById(i).innerHTML += "&nbsp" + album.albums.items[0].artists[x].name + ","
                     }
                 }
+                fav_animation()
             }
+            
             like()
-            fav_animation(album.albums.items[0].id)
             gerar_token = false
 
         }
@@ -188,7 +189,7 @@
                                         
                                     </div>
                                     <div class="fav">
-                                        <button class="favorite-button">
+                                        <button class="favorite-button" id="${data[i].id}" onclick="fav_caller('${data[i].id}')">
                                             <div class="icon">
                                                 <div class="star"></div>
                                             </div>
@@ -232,10 +233,7 @@
             }
         }  
 
-        function deslogar() {
-            localStorage.clear()
-            location.reload()
-        }
+        
 
 
         function fav(id) {
@@ -255,6 +253,19 @@
             fetch(`http://127.0.0.1:8000/removelike/${localStorage.getItem("usuario")}/${id}`, {
                 method: "DELETE",             
             })
+        }
+
+        function fav_caller(id) {
+
+            let button = document.getElementById(id)
+
+            if (!button.classList.contains("liked")) {
+                button.classList.add("liked")
+                fav(id)
+            } else if(button.classList.contains("liked")){
+                button.classList.remove("liked")
+                unfav(id)
+            }
         }
 
     </script>

@@ -18,13 +18,6 @@ function fav_animation(id) {
                     duration: .325,
                     onStart() {
                         button.classList.add('star-round')
-                        if (!button.classList.contains("liked")) {
-                            button.classList.add("liked")
-                            fav(id)
-                        } else if(button.classList.contains("liked")){
-                            button.classList.remove("liked")
-                            unfav(id)
-                        }
                     }
                 }, {
                     '--star-y': '-64px',

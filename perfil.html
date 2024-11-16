@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="perfil.css">
+    <title>Soundsnap</title>
+</head>
+<body onload="main_perfil()">
+    <header>
+        <a href="/" class="logo">
+            <img src="logo_soundsnap_claro.png" alt="" class="logo">
+        </a>
+        <form id="pesquisa">
+            <input type="text" placeholder="O quê você quer ouvir hoje?"> 
+            <button type="submit">
+                <img src="play_bege_soundsnap.png" alt="">
+            </button>
+        </form>
+        <div class="form user">
+            <button onclick="deslogar()">Sair</button>
+        </div>
+    </header>
+
+    <main>
+        
+    </main>
+    <script src="acess.js"></script>
+    <script>
+        document.getElementById("pesquisa").addEventListener("submit", function name(e) {
+            e.preventDefault()
+        })
+    </script>
+</body>
+</html>

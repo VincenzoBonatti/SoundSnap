@@ -11,15 +11,13 @@
         <a href="/" class="logo">
             <img src="logo_soundsnap_claro.png" alt="" class="logo">
         </a>
-        <form action="" method="get" id="pesquisa">
-            <input type="text"  placeholder="O quê você quer ouvir hoje?"> 
+        <form id="pesquisa">
+            <input type="text" placeholder="O quê você quer ouvir hoje?"> 
             <button type="submit">
                 <img src="play_bege_soundsnap.png" alt="">
             </button>
         </form>
-        <a href="cadastro.html" class="form">
-            <img src="user.png" alt="">
-        </a>
+        <div class="user" id="user"></div>
     </header>
     <main>
         <div class="container">
@@ -34,6 +32,10 @@
     <script src="acess.js"></script>
     <script>
         
+document.getElementById("pesquisa").addEventListener("submit", function name(e) {
+    e.preventDefault()
+})
+
 async function album(token, id) {
     const result = fetch("https://api.spotify.com/v1/albums/" + id, {
         headers: {'Authorization': "Bearer " + token.access_token}
@@ -140,6 +142,26 @@ async function displayer(artista, album) {
         
     }
 }
+
+        function header() {
+            user = document.getElementById("user")
+            if (!localStorage.getItem("usuario")) {
+                user.innerHTML = 
+                `
+                <a href="cadastro.html">
+                    <img src="user.png" alt="">
+                </a>
+                `
+            } else if (localStorage.getItem("usuario")){
+                user.innerHTML = 
+                `
+                    <a href="${`perfil.html?usuario=${localStorage.getItem("usuario")}`}" class="logado">
+                        ${localStorage.getItem("usuario")}
+                    </a>
+                    <button onclick="deslogar()">Sair</button>
+                `
+            }
+        }  
 
     </script>
 </body>
