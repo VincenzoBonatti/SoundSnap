@@ -6,19 +6,23 @@ cadastro.addEventListener('submit', evento =>{
     const formData = new FormData(cadastro)
     const form = Object.fromEntries(formData)
 
-     fetch(`https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/${form.usuario}`, {
+    fetch(`http://127.0.0.1:8000/users/${form.usuario}`, {
         headers: {
             "Content-Type": "Application/json",
             "Access-Control-Allow-Origin": "*"
         }}).then(data => {
             if (data.status == 404) {            
-                    fetch("https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/", {
+                    fetch("http://127.0.0.1:8000/users/", {
                         method: "POST",
                         headers: {
-                            "Content-Type": "Application/json"
+                            "Content-Type": "Application/json",
+                            "Access-Control-Allow-Origin": "*"
                         },
                         body: JSON.stringify(form)
-                    }).then(data => data.json()).then(response => console.log(response)).then(alert("USUÁRIO CRIADO COM SUCESSO"))/*.then(window.location.replace('/'))*/
+                    })
+                    .then(alert("USUÁRIO CRIADO COM SUCESSO"))
+                    .then(localStorage.setItem("usuario", form.usuario))
+                    .then(window.location.replace('/'))
             } else if (data.status == 200){
                 alert("Este nome de usuário já está em uso")
             }
@@ -36,7 +40,7 @@ login.addEventListener('submit', evento =>{
     const formData = new FormData(login)
     const data = Object.fromEntries(formData)
 
-    fetch(`https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/${data.usuario}`, {
+    fetch(`http://127.0.0.1:8000/users/${data.usuario}`, {
         headers: {
             "Content-Type": "Application/json",
             "Access-Control-Allow-Origin": "*"
@@ -46,9 +50,11 @@ login.addEventListener('submit', evento =>{
                 alert("Este usuário não existe")
             }else if (data.senha == response.senha) {
 
-                //
+
+                localStorage.setItem("usuario", data.usuario);
+                
                 alert("logado com sucesso")
-                /*.then(window.location.replace('/'))*/
+                window.location.replace('/')
             } else if(data.senha != response.senha){
                 alert("Senha incorreta")
             }

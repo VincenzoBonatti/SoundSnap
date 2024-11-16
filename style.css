@@ -21,6 +21,42 @@ header a {
     padding: 5px;
 
 }
+.user{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 50px;
+    border-radius: 100%;
+    padding: 5px;
+    height: 70%;
+    gap: 1em;
+}
+.user a{
+    height: 100%;
+    width: 100%;
+    background-color: #d4cdc5;
+    border: 1px solid black;
+}
+
+.user button{
+    background-color: #fa4d4d;
+    color: #191013;
+    border: 1px solid black;
+    padding: 3px 6px 3px 6px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.logado{
+    display: flex;
+    align-items: center;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    color: #191013;
+    text-decoration: none;
+    font-size: 1.3em;
+    height: fit-content !important;
+}
 
 header a img {
     max-height: 100%;
@@ -40,6 +76,7 @@ form {
     height: 45%;
     border-radius: 70px;
     padding-right: 10px;
+    border: 1px solid black;
 }
 
 form input, 

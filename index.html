@@ -22,9 +22,7 @@
                 <img src="play_bege_soundsnap.png" alt="">
             </button>
         </form>
-        <a href="cadastro.html" class="form">
-            <img src="user.png" alt="">
-        </a>
+        <div class="user" id="user"></div>
     </header>
 
     <main>
@@ -81,7 +79,7 @@
             for (let i = index; i < index + 5; i++) {
                 var album = await get_rand(token, "album")
                 let likes = Math.floor(Math.random() * 15000)
-
+                
                 a.innerHTML += `
                 <div class="post">
                     <a href="${`album.html?id=${album.albums.items[0].id}`}">
@@ -128,7 +126,8 @@
                     }
                 }
             }
-            animations()
+            like()
+            fav_animation(album.albums.items[0].id)
             gerar_token = false
 
         }
@@ -207,10 +206,55 @@
                         document.getElementById(i).innerHTML += "&nbsp" + data[i].artists[x].name + ","
                     }
                 }
-                animations()
-
+                like()
+                fav_animation(data[i].id)
             }
             carregar_mais = false
+        }
+
+        function header() {
+            user = document.getElementById("user")
+            if (!localStorage.getItem("usuario")) {
+                user.innerHTML = 
+                `
+                <a href="cadastro.html">
+                    <img src="user.png" alt="">
+                </a>
+                `
+            } else if (localStorage.getItem("usuario")){
+                user.innerHTML = 
+                `
+                    <a href="${`perfil.html?usuario=${localStorage.getItem("usuario")}`}" class="logado">
+                        ${localStorage.getItem("usuario")}
+                    </a>
+                    <button onclick="deslogar()">Sair</button>
+                `
+            }
+        }  
+
+        function deslogar() {
+            localStorage.clear()
+            location.reload()
+        }
+
+
+        function fav(id) {
+            console.log(id)
+            fetch(`http://127.0.0.1:8000/users/${localStorage.getItem("usuario")}/likes`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "Application/json",
+                    "Access-Control-Allow-Origin": "*"
+                },
+                body:JSON.stringify({ album_id: id })                
+            })
+        }
+
+        function unfav(id) {
+            console.log(id)
+            fetch(`http://127.0.0.1:8000/removelike/${localStorage.getItem("usuario")}/${id}`, {
+                method: "DELETE",             
+            })
         }
 
     </script>
