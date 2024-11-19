@@ -6,17 +6,25 @@ cadastro.addEventListener('submit', evento =>{
     const formData = new FormData(cadastro)
     const form = Object.fromEntries(formData)
 
-    fetch(`http://127.0.0.1:8000/users/${form.usuario}`, {
+    fetch(`https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/${form.usuario}`, {
         headers: {
             "Content-Type": "Application/json",
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "*",
+            "Cache-Control" : "no-cache",
+            "Accept" : "*/*",
+            "Connection" : "Keep-Alive",
+            "Accept-Encoding" : "gzip"
         }}).then(data => {
             if (data.status == 404) {            
-                    fetch("http://127.0.0.1:8000/users/", {
+                    fetch("https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/", {
                         method: "POST",
                         headers: {
                             "Content-Type": "Application/json",
-                            "Access-Control-Allow-Origin": "*"
+                            "Access-Control-Allow-Origin": "*",
+                            "Cache-Control" : "no-cache",
+                            "Accept" : "*/*",
+                            "Connection" : "Keep-Alive",
+                            "Accept-Encoding" : "gzip"
                         },
                         body: JSON.stringify(form)
                     })
@@ -40,10 +48,14 @@ login.addEventListener('submit', evento =>{
     const formData = new FormData(login)
     const data = Object.fromEntries(formData)
 
-    fetch(`http://127.0.0.1:8000/users/${data.usuario}`, {
+    fetch(`https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/${data.usuario}`, {
         headers: {
-            "Content-Type": "Application/json",
-            "Access-Control-Allow-Origin": "*"
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Cache-Control" : "no-cache",
+            "Accept" : "*/*",
+            "Connection" : "Keep-Alive",
+            "Accept-Encoding" : "gzip"
         }}).then(data => data.json()).then(response => {
             console.log(response)
             if (response.detail == "User not found"){

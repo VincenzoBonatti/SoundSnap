@@ -50,6 +50,9 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+
+
+
     <script src="animations.js"></script>
 
     <script>
@@ -238,11 +241,15 @@
 
         function fav(id) {
             console.log(id)
-            fetch(`http://127.0.0.1:8000/users/${localStorage.getItem("usuario")}/likes`, {
+            fetch(`https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/${localStorage.getItem("usuario")}/likes`, {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "Application/json",
-                    "Access-Control-Allow-Origin": "*"
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*",
+                    "Cache-Control" : "no-cache",
+                    "Accept" : "*/*",
+                    "Connection" : "Keep-Alive",
+                    "Accept-Encoding" : "gzip"
                 },
                 body:JSON.stringify({ album_id: id })                
             })
@@ -250,7 +257,7 @@
 
         function unfav(id) {
             console.log(id)
-            fetch(`http://127.0.0.1:8000/removelike/${localStorage.getItem("usuario")}/${id}`, {
+            fetch(`https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/removelike/${localStorage.getItem("usuario")}/${id}`, {
                 method: "DELETE",             
             })
         }

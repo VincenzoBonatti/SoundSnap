@@ -71,7 +71,7 @@ async def read_album(album_id: str):
     album["id"] = str(album["_id"])
     return album
 
-@app.patch("/users/{user_id}/likes")
+@app.put("/users/{user_id}/likes")
 async def add_likes(user_id: str, like_data: id_Likes):
     # Verifica se o usuário existe
     user = await usuarios_collection.find_one({"usuario": user_id})
