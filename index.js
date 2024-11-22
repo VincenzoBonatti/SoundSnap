@@ -13,6 +13,11 @@ async function artistas(token) {
     let a = document.getElementsByClassName("sugestao_art")
     for (let i = -1; i >= -1 * a.length; i--) {
         let artista = await get_rand(token, "artist")
+        if (artista.artists.items[0] == null) {
+            while (album.albums.items[0] == null) {
+                artista = await get_rand(token, "artist")
+            }
+        }
         document.getElementById(i).innerHTML = `<p>${artista.artists.items[0].name}</p><a href=${artista.artists.items[0].external_urls.spotify} target="_blank"><img id="img" src= ${artista.artists.items[0].images[1].url}>`
     }
 }
@@ -23,6 +28,12 @@ async function feed(token, index) {
     let a = document.getElementById("feed")
     for (let i = index; i < index + 5; i++) {
         var album = await get_rand(token, "album")
+        console.log(album)
+        if (album.albums.items[0] == null) {
+            while (album.albums.items[0] == null) {
+                album = await get_rand(token, "album")
+            }
+        }
         let likes = Math.floor(Math.random() * 15000)
         
         a.innerHTML += `

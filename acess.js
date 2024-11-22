@@ -51,8 +51,7 @@ let url = `https://api.spotify.com/v1/search?query=${randomSearch}&offset=${getR
         return response
     })
     let response = await result
-
-  
+    
     return response
 }
 
