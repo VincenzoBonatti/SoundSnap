@@ -6,7 +6,7 @@ cadastro.addEventListener('submit', evento =>{
     const formData = new FormData(cadastro)
     const form = Object.fromEntries(formData)
 
-    fetch(`https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/${form.usuario}`, {
+    fetch(`https://spotifyapi-hct0.onrender.com/users/${form.usuario}`, {
         headers: {
             "Content-Type": "Application/json",
             "Access-Control-Allow-Origin": "*",
@@ -16,7 +16,7 @@ cadastro.addEventListener('submit', evento =>{
             "Accept-Encoding" : "gzip"
         }}).then(data => {
             if (data.status == 404) {            
-                    fetch("https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/", {
+                    fetch("https://spotifyapi-hct0.onrender.com/users/", {
                         method: "POST",
                         headers: {
                             "Content-Type": "Application/json",
@@ -48,7 +48,7 @@ login.addEventListener('submit', evento =>{
     const formData = new FormData(login)
     const data = Object.fromEntries(formData)
 
-    fetch(`https://chilling-spooky-superstition-9p4qq97g9wg395p5-8000.app.github.dev/users/${data.usuario}`, {
+    fetch(`https://spotifyapi-hct0.onrender.com/users/${data.usuario}`, {
         headers: {
             'Content-Type': 'application/json',
             "Access-Control-Allow-Origin": "*",

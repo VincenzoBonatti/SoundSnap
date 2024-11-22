@@ -75,13 +75,14 @@ async function album_main() {
     await album(token, id)
 }
 
+
 async function main_perfil() {
     let token = await acess()
 
     const params = new URLSearchParams(window.location.search);
     const user = params.get('usuario');
         
-    await album(token, user)
+    await perfil(token, user)
 }
 
 

@@ -113,3 +113,43 @@ main {
     background-color: #d4cdc5;
     padding-bottom: 1em;
 }
+
+.container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+}
+
+
+#perfil{
+    display: flex;
+    width: 70%;
+    justify-content: center;
+    gap: 5em;
+    align-items: center;
+
+    & img{
+        width: 7em;
+    }
+}
+
+.infos{
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+}
+
+#favs{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+
+    & img{
+        border-radius: 1.25em;
+        border: #191013 2px solid;
+    }
+}
