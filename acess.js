@@ -139,6 +139,6 @@ async function searchSpotify(event) {
 
 function deslogar() {
     localStorage.clear()
-    window.location.replace('/')
+    window.location.replace('/SoundSnap/')
 }
   

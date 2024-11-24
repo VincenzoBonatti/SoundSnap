@@ -30,7 +30,7 @@ cadastro.addEventListener('submit', evento =>{
                     })
                     .then(alert("USUÁRIO CRIADO COM SUCESSO"))
                     .then(localStorage.setItem("usuario", form.usuario))
-                    .then(window.location.replace('/'))
+                    .then(window.location.replace('/SoundSnap/'))
             } else if (data.status == 200){
                 alert("Este nome de usuário já está em uso")
             }
@@ -65,7 +65,7 @@ login.addEventListener('submit', evento =>{
                 localStorage.setItem("usuario", data.usuario);
                 
                 alert("logado com sucesso")
-                window.location.replace('/')
+                window.location.replace('/SoundSnap/')
             } else if(data.senha != response.senha){
                 alert("Senha incorreta")
             }
