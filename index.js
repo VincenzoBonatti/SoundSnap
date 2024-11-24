@@ -13,8 +13,8 @@ async function artistas(token) {
     let a = document.getElementsByClassName("sugestao_art")
     for (let i = -1; i >= -1 * a.length; i--) {
         let artista = await get_rand(token, "artist")
-        if (artista.artists.items[0] == null) {
-            while (album.albums.items[0] == null) {
+        if (!artista.artists.items[0]) {
+            while (!artista.artists.items[0]) {
                 artista = await get_rand(token, "artist")
             }
         }
@@ -28,9 +28,8 @@ async function feed(token, index) {
     let a = document.getElementById("feed")
     for (let i = index; i < index + 5; i++) {
         var album = await get_rand(token, "album")
-        console.log(album)
-        if (album.albums.items[0] == null) {
-            while (album.albums.items[0] == null) {
+        if (!album.albums.items[0]) {
+            while (!album.albums.items[0]) {
                 album = await get_rand(token, "album")
             }
         }
@@ -193,7 +192,6 @@ function header() {
 
 
 function fav(id) {
-    console.log(id)
     fetch(`https://spotifyapi-hct0.onrender.com/users/${localStorage.getItem("usuario")}/likes`, {
         method: "PUT",
         headers: {
@@ -205,7 +203,6 @@ function fav(id) {
 }
 
 function unfav(id) {
-    console.log(id)
     fetch(`https://spotifyapi-hct0.onrender.com/removelike/${localStorage.getItem("usuario")}/${id}`, {
         method: "DELETE",             
     })

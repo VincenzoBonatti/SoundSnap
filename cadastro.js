@@ -57,7 +57,6 @@ login.addEventListener('submit', evento =>{
             "Connection" : "Keep-Alive",
             "Accept-Encoding" : "gzip"
         }}).then(data => data.json()).then(response => {
-            console.log(response)
             if (response.detail == "User not found"){
                 alert("Este usuário não existe")
             }else if (data.senha == response.senha) {

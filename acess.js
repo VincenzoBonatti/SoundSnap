@@ -51,7 +51,7 @@ let url = `https://api.spotify.com/v1/search?query=${randomSearch}&offset=${getR
         return response
     })
     let response = await result
-    
+
     return response
 }
 
@@ -60,8 +60,8 @@ async function main() {
     let token = await acess()
 
     header()
-    await artistas(token)
-    await feed(token, 0)
+    artistas(token)
+    feed(token, 0)
 
 }
 
@@ -126,7 +126,6 @@ async function searchSpotify(event) {
                 const result = await data; 
                     resultado_pesquisa = await result;
 
-                // console.log('resultado_pesquisa =>', resultado_pesquisa)
                 
                 
                 await mostrarResultadoPesquisaEmTela(resultado_pesquisa.albums.items)

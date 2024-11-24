@@ -46,7 +46,6 @@ async function album(token, id) {
     })
     let response = await result
     artista(token, response.artists[0].id, response) 
-    console.log(response)
     return response
 }
 
@@ -61,7 +60,6 @@ async function artista(token, id, album) {
         return response
     })
     let response = await result
-    console.log(response)
     await displayer(response, album)
     return response
 }
