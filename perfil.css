@@ -147,6 +147,7 @@ main {
     align-items: center;
     justify-content: center;
     gap: 1em;
+    width: 90%;
 
     & img{
         border-radius: 1.25em;
